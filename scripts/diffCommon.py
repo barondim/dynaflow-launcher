@@ -32,6 +32,7 @@ def compare_files(result_input_file_path, reference_input_file_path, verbose):
     if not dfl_home:
         MissingEnvironmentVariable("DYNAFLOW_LAUNCHER_HOME")
 
+    print("dfl_home: " + dfl_home)
     with open(result_input_file_path) as result_file, open(reference_input_file_path) as reference_file:
         for result_line, reference_line in zip_longest(result_file, reference_file):
             if result_line != reference_line:
