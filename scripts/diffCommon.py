@@ -31,6 +31,14 @@ def compare_files(result_input_file_path, reference_input_file_path, verbose):
     dfl_home = os.getenv("DYNAFLOW_LAUNCHER_HOME")
     if not dfl_home:
         MissingEnvironmentVariable("DYNAFLOW_LAUNCHER_HOME")
+
+    with open(result_input_file_path) as result_file, open(reference_input_file_path) as reference_file:
+        for result_line, reference_line in zip_longest(result_file, reference_file):
+            if result_line != reference_line:
+                print("result_line: " + result_line)
+                print("reference_line: " + reference_line)
+                print("--------------------")
+
     with open(result_input_file_path) as result_file, open(reference_input_file_path) as reference_file:
         identical = all(result_line.replace(dfl_home, "") == reference_line for result_line, reference_line in zip_longest(result_file, reference_file))
 
