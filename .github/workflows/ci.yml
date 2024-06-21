@@ -195,6 +195,7 @@ jobs:
           MSMPI_BIN: C:\Program Files\Microsoft MPI\Bin\
           PATH: C:\Windows\system32;C:\Program Files\Git\cmd;C:\hostedtoolcache\windows\Python\3.7.9\x64
         run: |
+          pip install lxml
           set PATH=%MSMPI_BIN%;%PATH%
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           call scripts\dynaflow-launcher verbose tests "^^M"
