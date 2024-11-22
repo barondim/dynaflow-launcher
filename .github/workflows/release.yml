@@ -185,11 +185,11 @@ jobs:
       - name: Fetch Dynawo and Dynawo Algorithms
         shell: bash
         run: |
-          curl -LOs https://github.com/${{ github.repository_owner }}/dynawo/releases/download/v$DYNAWO_VERSION/Dynawo_Windows_v$DYNAWO_VERSION.zip
+          curl -LOs https://github.com/dynawo/dynawo/releases/download/nightly/Dynawo_Windows_v$DYNAWO_VERSION.zip
           if [ "${{ matrix.use-mpi.value }}" == "YES" ]; then
-            curl -LOs https://github.com/${{ github.repository_owner }}/dynawo-algorithms/releases/download/v$DYNAWO_VERSION/DynawoAlgorithms_Windows_v$DYNAWO_VERSION.zip
+            curl -LOs https://github.com/dynawo/dynawo-algorithms/releases/download/nightly/DynawoAlgorithms_Windows_v$DYNAWO_VERSION.zip
           else
-            curl -LOs https://github.com/${{ github.repository_owner }}/dynawo-algorithms/releases/download/v$DYNAWO_VERSION/DynawoAlgorithms_Windows_without_mpi_v$DYNAWO_VERSION.zip
+            curl -LOs https://github.com/dynawo/dynawo-algorithms/releases/download/nightly/DynawoAlgorithms_Windows_without_mpi_v$DYNAWO_VERSION.zip
           fi
 
       - name: Unzip Dynawo
