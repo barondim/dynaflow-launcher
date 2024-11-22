@@ -151,8 +151,15 @@ jobs:
 
   distribution-windows:
     if: github.event_name != 'workflow_dispatch' || inputs.perform-windows
-    name: Distribution Windows
+    name: Distribution Windows (${{ matrix.use-mpi.text }})
     runs-on: windows-2019
+    strategy:
+      matrix:
+        use-mpi:
+          - { value: YES, text: 'with MPI' }
+          - { value: NO, text: 'without MPI' }
+    env:
+      DYNAWO_USE_MPI: ${{ matrix.use-mpi.value }}
     steps:
       - name: No LF to CRLF conversion
         shell: cmd
@@ -205,7 +212,11 @@ jobs:
           md distrib
           cd distrib
           move /y ..\..\dfl-i dynaflow-launcher
-          7z a DynaFlowLauncher_Windows_v%DYNAWO_VERSION%.zip dynaflow-launcher
+          if "${{ matrix.use-mpi.value }}" == "YES" (
+            7z a DynaFlowLauncher_Windows_v%DYNAWO_VERSION%.zip dynaflow-launcher
+          ) else (
+            7z a DynaFlowLauncher_Windows_without_mpi_v%DYNAWO_VERSION%.zip dynaflow-launcher
+          )
 
       - name: Fetch release script
         uses: actions/checkout@v4
