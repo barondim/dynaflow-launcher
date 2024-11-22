@@ -158,8 +158,6 @@ jobs:
         use-mpi:
           - { value: YES, text: 'with MPI' }
           - { value: NO, text: 'without MPI' }
-    env:
-      DYNAWO_USE_MPI: ${{ matrix.use-mpi.value }}
     steps:
       - name: No LF to CRLF conversion
         shell: cmd
